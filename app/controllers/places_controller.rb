@@ -1,11 +1,13 @@
 class PlacesController < ApplicationController
-
+    before_action :authenticate_user!, only: [:new, :create]
+    
+    
     def index
         @places = Place.all.paginate(page: params[:page], per_page: 10)
         respond_to do |format|
             format.html
             format.json { render json: @places }
-    end
+        end
     end
     
     def new
@@ -13,13 +15,13 @@ class PlacesController < ApplicationController
     end
     
     def create
-        Place.create(place_params)  
+        current_user.places.create(place_params)  
         redirect_to root_path
     end
     
     private
     
     def place_params
-        params.requiere(:place).permit(:name, :description, :address)
+        params.require(:place).permit(:name, :description, :address)
     end
  end
