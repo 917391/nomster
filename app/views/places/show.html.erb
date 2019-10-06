@@ -101,3 +101,23 @@
     <% end %>
     </div>
 </div>
+<div class="clear"></div>
+<%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
+  <%= f.input :caption %>
+  <%= f.submit "Add a caption", class: 'btn btn-primary' %>
+<% end %>
+
+<h1>Pictures</h1>
+
+<div class = "col-10 offset-1">
+    <div class="row">
+    <% @place.photos.each do |photo| %>
+    <div class="col-12 col-sm-6">
+        <blockquote>
+            <%= photo.caption %>
+            <small><%= photo.user.email %></small>
+        </blockquote>
+    </div>
+    <% end %>
+    </div>
+</div>
