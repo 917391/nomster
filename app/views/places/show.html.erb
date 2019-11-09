@@ -4,22 +4,22 @@
   <br/><br/>
   <p><%= @place.description %></p>
   
-  #map {
-      height: 300%;
+  <style>
+    #map {
+      height: 300px;
     }
-    
-  
-  
+  </style>
+  </head>
+  <body>
   <div id="map"></div>
   <% if @place.latitude.present? && @place.longitude.present? %>
-
   <script>
 
     function initMap() {
       var myLatLng = {lat: <%= @place.latitude %>, lng: <%= @place.longitude %>};
 
       var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
+        zoom: 12,
         center: myLatLng
       });
 
@@ -29,16 +29,13 @@
         title: 'Hello World!'
       });
     }
-
   </script>
+
   <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxH-HXxnYbdZrsv19GxDRHkzPPXTYOs38
-  callback=initMap">
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxH-HXxnYbdZrsv19GxDRHkzPPXTYOs38&callback=initMap">
   </script>
 
   <div id="map"></div>
-  
-<% end %>
 
   <br />
   
@@ -104,6 +101,7 @@
 <div class="clear"></div>
 <%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
   <%= f.input :caption %>
+  <%= f.input :picture %>
   <%= f.submit "Add a caption", class: 'btn btn-primary' %>
 <% end %>
 
@@ -115,6 +113,7 @@
     <div class="col-12 col-sm-6">
         <blockquote>
             <%= photo.caption %>
+            <%= image_tag photo.picture.url.to_s, :height=>"200px" %>
             <small><%= photo.user.email %></small>
         </blockquote>
     </div>
