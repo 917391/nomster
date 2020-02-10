@@ -5,11 +5,11 @@
   <p><%= @place.description %></p>
 
    <% if @place.latitude.present? && @place.longitude.present? do %>
-    <style>
-      #map {
-        height: 300px;
-      }
-    </style>
+    
+    #map {
+      height: 300px;
+    }
+    console.log("hello")
     <script>
 
       function initMap() {
