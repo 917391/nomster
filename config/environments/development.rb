@@ -1,6 +1,7 @@
 Rails.application.configure do
+  config.action_mailer.delivery_method = :test
   # Settings specified here will take precedence over those in config/application.rb.
-    config.action_mailer.default_url_options = { host: 'localhost:3030'}
+    
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -11,7 +12,6 @@ Rails.application.configure do
 
   # Show full error reports.
   config.consider_all_requests_local = true
-  config.action_mailer.delivery_method = :test
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
@@ -59,3 +59,4 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 end
+config.action_mailer.default_url_options = { host: 'localhost:3030'}
